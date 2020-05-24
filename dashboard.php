@@ -75,13 +75,30 @@ $mname= $n2['m_name'];
 
 if(isset($_REQUEST["new-product"]))
 {
+$productwithoutspaces=str_replace(" ","",$newproductname);
+$producttolower=strtolower($productwithoutspaces);
+$namepur= mysqli_query($con,"select product_name from product");
+$isSameName=false;
+while($nameval=mysqli_fetch_array($namepur))
+{
+    $existingproduct=$nameval['product_name'];
+    $exisproductwithoutspaces=str_replace(" ","",$existingproduct);
+    $exisproducttolower=strtolower($exisproductwithoutspaces);
+    if($exisproducttolower==$producttolower){
+        $isSameName=true;
+        break;
+    }
+}
 
-$sqlcr = "insert into product(product_name) VALUES (";
-$sqlcr.= "'" . $newproductname . "')";
+if($isSameName){
+    echo '<script>alert("Product name already exists")</script>';    
+}else{
+    $sqlcr = "insert into product(product_name) VALUES (";
+    $sqlcr.= "'" . $newproductname . "')";
+    mysqli_query($con,$sqlcr );
+    echo '<script>alert("Product name added")</script>';
+}
 
-mysqli_query($con,$sqlcr );
-
-echo '<script>alert("Product name added")</script>';
 }
 
 if(isset($_REQUEST["product-submit"]))
@@ -127,15 +144,34 @@ echo '<script>alert("Product added successfully to warehouse.")</script>';
 
 if(isset($_REQUEST["new-restaurant"]))
 {
+    $reswithoutspaces=str_replace(" ","",$newrestaurantname);
+    $restolower=strtolower($reswithoutspaces);
+    $namepur= mysqli_query($con,"select restaurant_name from restaurant");
+    $isSameName=false;
+    while($nameval=mysqli_fetch_array($namepur))
+    {
+        $existingres=$nameval['restaurant_name'];
+        $exisreswithoutspaces=str_replace(" ","",$existingres);
+        $exisrestolower=strtolower($exisreswithoutspaces);
+        if($exisrestolower==$restolower){
+            $isSameName=true;
+            break;
+        }
+    }
+    
+    if($isSameName){
+        echo '<script>alert("Restaurant name already exists")</script>';    
+    }else{
+        $sqlcr = "insert into restaurant(restaurant_name,address,mobile) VALUES (";
+        $sqlcr.= "'" . $newrestaurantname . "',";
+        $sqlcr.= "'" . $restaurantaddress . "',";
+        $sqlcr.= "'" . $restaurantmobile . "')";
 
-$sqlcr = "insert into restaurant(restaurant_name,address,mobile) VALUES (";
-$sqlcr.= "'" . $newrestaurantname . "',";
-$sqlcr.= "'" . $restaurantaddress . "',";
-$sqlcr.= "'" . $restaurantmobile . "')";
+        mysqli_query($con,$sqlcr );
 
-mysqli_query($con,$sqlcr );
+        echo '<script>alert("Restaurant details added")</script>';
+    }
 
-echo '<script>alert("Restaurant details added")</script>';
 }
 
 if(isset($_REQUEST["product-submit1"]))
