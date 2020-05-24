@@ -870,7 +870,7 @@ $("#cat").hide();
                                                         echo "<tr>";
                                                         echo "<td>". $mthc[0]."</td>";
                                                         echo "<td>". $mthc[1]."</td>";
-                                                        echo "<td>". $mthc[2]."</td>";
+                                                        echo "<td>". round($mthc[2],2)."</td>";
                                                         echo "<td>". $mthc[3]."</td>";
                                                         echo "</tr>";
                                                     }
@@ -1155,9 +1155,9 @@ $("#cat").hide();
                                               echo "<td>". $nameval['Product Name'] . "</td>";
                                               echo "<td>". $nameval['Quantity'] . "</td>";
                                               echo "<td>". $nameval['Total Cost']."</td>";
-                                              echo "<td>". $nameval['Average Cost per Unit']."</td>";
-                                              echo "<td>". $nameval['Maximum Cost per Unit']."</td>";
-                                              echo "<td>". $nameval['Minimum Cost per Unit']."</td>";
+                                              echo "<td>". round($nameval['Average Cost per Unit'],2)."</td>";
+                                              echo "<td>". round($nameval['Maximum Cost per Unit'],2)."</td>";
+                                              echo "<td>". round($nameval['Minimum Cost per Unit'],2)."</td>";
                                               echo "</tr>";
                                               
                                            }
