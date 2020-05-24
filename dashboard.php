@@ -146,11 +146,6 @@ $avail= mysqli_query($con,"select quantity from warehouse_details where product_
 $avail1=  mysqli_fetch_assoc($avail);
 $existing_quantity= $avail1['quantity'];
 
-echo $existing_quantity;
-echo $restaurantquantity;
-echo $productname;
-
-
 if($restaurantquantity <= $existing_quantity)
 {
     $sqlcr = "insert into restaurant_stock(product_id,quantity,restaurant_id,purchase_date) VALUES (";
@@ -169,7 +164,7 @@ echo '<script>alert("Restaurant purchase done successful")</script>';
 }
 else
 {
-echo '<script>alert("Shortage of quantity. Available quantity is ")</script>';
+echo '<script>alert("Shortage of quantity.")</script>';
 }
 
 }

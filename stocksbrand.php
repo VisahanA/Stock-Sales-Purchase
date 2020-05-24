@@ -1,6 +1,6 @@
 <?php 
 error_reporting(0);
-$con = mysqli_connect("localhost", "root", "", "warehouse");
+$con = mysqli_connect("localhost", "root", "", "warehouse_management");
 if(!isset($con))
 {
     die("Database Not Found");
@@ -10,9 +10,8 @@ if(!isset($con))
 $gtrdet1 = mysqli_fetch_assoc($gtrdet);
 $setExcelName = $gtrdet1["e_title"];
 */			
-$setExcelName = "Available Products(Brand)";
-$setSql = mysqli_query($con,  "select p_name AS 'PRODUCT CATEGORY' ,p_brand AS BRAND, p_desc AS 'MODEL No', p_cost AS 'COST/ITEM',
-                        p_quantity AS 'TOTAL QUANTITY',tot_cost AS 'TOTAL COST' from t_product ORDER BY `t_product`.`p_brand` ASC");
+$setExcelName = "Available Warehouse Products(Product Name)";
+$setSql = mysqli_query($con,  "select product_id AS 'PRODUCT ID' ,product_name AS 'PRODUCT NAME', quantity AS 'QUANTITY' from warehouse_details ORDER BY `warehouse_details`.`product_name` ASC");
     
 $setCounter = mysqli_num_fields($setSql);
 
