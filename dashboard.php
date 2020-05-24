@@ -53,6 +53,12 @@ $restaurantpurchasedate=$_REQUEST["restaurantpurchasedate"];
 $warehousefromdate=$_REQUEST["warehousefromdate"];
 $warehousetodate=$_REQUEST["warehousetodate"];
 
+$res_pur_fromdate=$_REQUEST["res_pur_fromdate"];
+$res_pur_todate=$_REQUEST["res_pur_todate"];
+$res_pur_name=$_REQUEST["res_pur_name"];
+
+
+
 $mnthsel=$_REQUEST["mnthsel"];
 
 $q=mysqli_query($con,"select c_name from t_category where c_id='".$pname."'");
@@ -477,8 +483,8 @@ $("#cat").hide();
         <div class="container">
             <ul class="nav nav-tabs nav-justified">
                 <li class="active"><a data-toggle="tab" href="#npe">Home</a></li>
-                <li><a data-toggle="tab" href="#sup">Suppliers</a></li>
-                <li><a data-toggle="tab" href="#dea"> Dealers</a></li>
+                <li><a data-toggle="tab" href="#sup">Purchase</a></li>
+                <li><a data-toggle="tab" href="#dea"> Sales</a></li>
                 <li><a data-toggle="tab" href="#tran">Transaction</a></li>
                 <li><a data-toggle="tab" href="#chpas">Change Password</a></li>
             </ul>
@@ -520,86 +526,18 @@ $("#cat").hide();
                       
                     
                     <div class="container">
-                              <div class="panel-group">
-                                  <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                      <h5 class="panel-title">
-                                         <a data-toggle="collapse" href="#coo1"><center>Warehouse Stock Purchase</center></a>
-                                      </h5>
-                                      </div>
-                                      
-                                      <div id="coo1" class="panel-collapse collapse">
-                                          <div class="panel-body">Enter the details of the purchased product</div>
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" href="#coo6"><center>Add New Restaurant</center></a>
+                                        </h5>
+                                    </div>
+                                    <div id="coo6" class="panel-collapse collapse">
+                                        <div class="panel-body">Enter the details of the restaurant</div>
                                             <div class="panel-footer">
-                                            <form class='form-horizontal'  id="productentry" method="post" action="dashboard.php">
-                                        <div class='form-group'>
-                                            <div class='col-sm-5'>
-                                                <label class='control-label ' for='pbrand'> Product's Name :</label>
-                                            </div>
-                                            <div class='col-sm-7'>
-                                                <select id='productname' name="productname" class="pname">
-                                                    <option selected="selected">--Select Category--</option>
-                                                        <?php
-                                                            $stmt = $DB_con->prepare("SELECT * FROM product");
-                                                            $stmt->execute();
-                                                            while($row=$stmt->fetch(PDO::FETCH_ASSOC))
-                                                            {
-                                                                    ?>
-                                                            <option value="<?php echo $row['product_name']; ?>"><?php echo $row['product_name']; ?></option>
-                                                            <?php
-                                                            }
-                                                        ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                         <div class='form-group'>
-                                            <div class='col-sm-5'>
-                                                <label class='control-label ' for='pquan'> Product's Quantity :</label>
-                                            </div>
-                                            <div class='col-sm-7'>
-                                                <input type='number' min='1' class="form-control" id='quantity' name='quantity'>
-                                            </div>
-                                        </div>
-                                        <div class='form-group'>
-                                            <div class='col-sm-5'>
-                                                <label class='control-label ' for='pquan'> Price :</label>
-                                            </div>
-                                            <div class='col-sm-7'>
-                                                <input type='number' min='1' class="form-control" id='price' name='price'>
-                                            </div>
-                                        </div>
-                                        <div class='form-group'>
-                                            <div class='col-sm-5'>
-                                                <label class='control-label ' for='pquan'> Date :</label>
-                                            </div>
-                                            <div class='col-sm-7'>
-                                                <input type='date' class="form-control" id='date' name='date'>
-                                            </div>
-                                        </div>
-
-                                        <div class='form-group'>
-                                            <div class='col-sm-10'>
-                                                <center><input type="submit" name="product-submit" id="product-submit"
-                                                        class="form-control btn btn-login" value="Submit"></center>
-                                             </div>  
-                                        </div>
-                                    </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>  
-                <div class="panel-group">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                        <h5 class="panel-title">
-                        <a data-toggle="collapse" href="#coo6"><center>Add New Restaurant</center></a>
-                        </h5>
-                        </div>
-                        <div id="coo6" class="panel-collapse collapse">
-                            <div class="panel-body">Enter the details of the restaurant</div>
-                                <div class="panel-footer">
-                                    <form class='form-horizontal'  id="productentry" method="post" action="">
-                                        <div class='form-group'>
+                                                <form class='form-horizontal'  id="productentry" method="post" action="">
+                                                    <div class='form-group'>
                                             <div class='col-sm-5'>
                                                 <label class='control-label ' for='pbrand'> Restaurant Name :</label>
                                             </div>
@@ -634,153 +572,6 @@ $("#cat").hide();
                                 </div>
                             </div>
                         </div>
-                <div class="panel-group">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5 class="panel-title">
-                                <a data-toggle="collapse" href="#coo2"><center>Restaurant Stock Purchase</center></a>
-                            </h5>
-                        </div>
-
-                        <div id="coo2" class="panel-collapse collapse">
-                            <div class="panel-body">Enter the details of restaurant stock purchase</div>
-                                <div class="panel-footer">
-                                    <form class='form-horizontal'  id="productentry" method="post" action="">
-                                    <div class='form-group'>
-                                            <div class='col-sm-5'>
-                                                <label class='control-label' for='pname1' > Product Name :</label>
-                                            </div>
-                                            <div class='col-sm-7'>
-                                                <select id='restaurantproductname' name="restaurantproductname" class="pname">
-                                                    <option selected="selected">--Select Category--</option>
-                                                    <?php
-                                                            $stmt = $DB_con->prepare("SELECT * FROM product");
-                                                            $stmt->execute();
-                                                            while($row=$stmt->fetch(PDO::FETCH_ASSOC))
-                                                            {
-                                                                    ?>
-                                                            <option value="<?php echo $row['product_name']; ?>"><?php echo $row['product_name']; ?></option>
-                                                            <?php
-                                                            }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class='form-group'>
-                                            <div class='col-sm-5'>
-                                                <label class='control-label' for='pname1' > Restaurant Name :</label>
-                                            </div>
-                                            <div class='col-sm-7'>
-
-                                                <select  id='restaurant_name' name="restaurant_name" class="pname1">
-                                                    <option selected="selected">--Select Category--</option>
-                                                    <?php
-                                                            $stmt1 = $DB_con->prepare("SELECT * FROM restaurant");
-                                                            $stmt1->execute();
-                                                            while($row=$stmt1->fetch(PDO::FETCH_ASSOC))
-                                                            {
-                                                                    ?>
-                                                            <option value="<?php echo $row['restaurant_name']; ?>"><?php echo $row['restaurant_name']; ?></option>
-                                                            <?php
-                                                            }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class='form-group'>
-                                            <div class='col-sm-5'>
-                                                <label class='control-label ' for='pbrand1'>Quantity</label>
-                                            </div>
-                                            <div class='col-sm-7'>
-                                                <input type='text' class="form-control" id='restaurantquantity' name='restaurantquantity'>
-                                            </div>
-                                        </div>
-                                        <div class='form-group'>
-                                            <div class='col-sm-5'>
-                                                <label class='control-label ' for='pbrand1'>Date</label>
-                                            </div>
-                                            <div class='col-sm-7'>
-                                                <input type='date' class="form-control" id='restaurantpurchasedate' name='restaurantpurchasedate'>
-                                            </div>
-                                        </div>
-                                        <div class='form-group'>
-                                            <div class='col-sm-10'>
-                                                <center><input type="submit" name="product-submit1" id="product-submit1"
-                                                        class="form-control btn btn-login" value="Submit"></center>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h5 class="panel-title">
-                                    <a data-toggle="collapse" href="#coo7"><center>Warehouse Purchase Report</center></a>
-                                </h5>
-                            </div>
-                        </div>
-                        <div id="coo7" class="panel-collapse collapse">
-                    <div class="panel-body">Select the range</div>
-                        <div>
-                            <form class='form-horizontal'  id="productsold" method="post" action="">
-                                <div class='form-group'>
-                                    <div class='col-sm-5'>
-                                        <label class='control-label ' for='pbrand1'>From Date :</label>
-                                    </div>
-                                    <div class='col-sm-7'>
-                                        <input type='date' class="form-control" id='warehousefromdate' name='warehousefromdate'>
-                                    </div>
-                                </div>
-                                <div class='form-group'>
-                                    <div class='col-sm-5'>
-                                        <label class='control-label ' for='pbrand1'>To Date :</label>
-                                    </div>
-                                    <div class='col-sm-7'>
-                                        <input type='date' class="form-control" id='warehousetodate' name='warehousetodate'>
-                                    </div>
-                                </div>
-                                <div class='form-group'>
-                                    <div class='col-sm-10'>
-                                        <center><input type="submit" name="showmprd" id="showmprd"
-                                                class="form-control btn btn-login" value="Show"></center>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                        <?php
-                            $mthch= mysqli_query($con, "select a.date,b.product_name,a.price,a.quantity from productprice a left join product b on a.product_id=b.product_id where a.date BETWEEN '$warehousefromdate' AND '$warehousetodate'");
-
-                            echo "<hr>" ;
-
-                            if(isset($_REQUEST["showmprd"]))
-                            {
-                                echo "<table class='table table-bordered'>";
-                                echo "<th>Date</th>";
-                                echo "<th>Product Name</th>";
-                                echo "<th>Cost per Item</th>";
-                                echo "<th>Quantity</th>";
-                                while($mthc = mysqli_fetch_array($mthch))
-                                {
-                                    echo "<tr>";
-                                    echo "<td>". $mthc[0]."</td>";
-                                    echo "<td>". $mthc[1]."</td>";
-                                    echo "<td>". $mthc[2]."</td>";
-                                    echo "<td>". $mthc[3]."</td>";
-                                    echo "</tr>";
-                                }
-                                echo "<tr>";
-                                    echo "<td colspan=5>";
-                                    //echo '<center><a href="mnthlyrcd.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
-                                    echo "</td>";
-                                    echo "</tr>";
-                                echo "</table>";
-                                }
-                        ?>
-                    </div>
                     <div class="panel panel-default">
                 <div class="panel-heading">
                     <center><h4>Stocks Available</h4></center>
@@ -918,225 +709,377 @@ $("#cat").hide();
         
                 <div id="sup" class="tab-pane fade" >
                     <div class="container">
-                              <div class="panel-group">
-                                  <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                          <h5 class="panel-title">
-                                              <a data-toggle="collapse" href="#co1"><center>ADD A NEW SUPPLIER</center></a>
-                                          </h5>
-                                      </div>
-                                      
-                                      <div id="co1" class="panel-collapse collapse">
-                                          <div class="panel-body">Enter the details of the new supplier</div>
-                                            <div class="panel-footer">
-                                                <form id="addsup" class="form-horizontal"  action=""  method="post">
-                        
-                                                    <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="snm">Name : </label> 
-                                                        <div class="col-sm-10">
-                                                            <input type='text' class="form-control" id='snm' name='snm' placeholder="Enter Supplier's Name">
-                                                        </div>
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" href="#coo10"><center>Warehouse Stock Purchase</center></a>
+                                </h5>
+                                </div>
+                                
+                                <div id="coo10" class="panel-collapse collapse">
+                                    <div class="panel-body">Enter the details of the new supplier</div>
+                                    <div class="panel-footer">
+                                        <form id="addsup" class="form-horizontal"  action=""  method="post">
+                
+                                        <div class='form-group'>
+                                                    <div class='col-sm-5'>
+                                                        <label class='control-label ' for='pbrand'> Product's Name :</label>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="seml">Email : </label> 
-                                                        <div class="col-sm-10">
-                                                            <input type='email' class="form-control" id='seml' name='seml' placeholder="Enter Supplier's Email">
-                                                        </div>
+                                                    <div class='col-sm-7'>
+                                                        <select id='productname' name="productname" class="pname">
+                                                            <option selected="selected">--Select Category--</option>
+                                                                <?php
+                                                                    $stmt = $DB_con->prepare("SELECT * FROM product");
+                                                                    $stmt->execute();
+                                                                    while($row=$stmt->fetch(PDO::FETCH_ASSOC))
+                                                                    {
+                                                                    ?>
+                                                                    <option value="<?php echo $row['product_name']; ?>"><?php echo $row['product_name']; ?></option><?php
+                                                                    }
+                                                                ?>
+                                                        </select>   
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="sph">Contact : </label> 
-                                                        <div class="col-sm-10">
-                                                            <input type='text' class="form-control" id='sph' name='sph'  placeholder="Enter Supplier's 1st Contact">
-                                                            <br>    <input type='text' class="form-control" id='sph1' name='sph1' placeholder="Enter Supplier's 2nd Contact">
-                                                        </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <div class='col-sm-5'>
+                                                        <label class='control-label ' for='pquan'> Product's Quantity :</label>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="scom">Company : </label> 
-                                                        <div class="col-sm-10">
-                                                            <input type='text' class="form-control" id='scom' name='scom' placeholder="Enter Supplier's Company">
-                                                            <input type='hidden' class="form-control" id='shid' name='shid' >
-                                                        </div>
+                                                    <div class='col-sm-7'>
+                                                        <input type='number' min='1' class="form-control" id='quantity' name='quantity'>
                                                     </div>
-
-                                                    <div class='form-group'>
-                                                        <div class='col-sm-10'>
-                                                            <center><input type="submit" name="newsup-submit" id="newsup-submit" 
-                                                                    class="form-control btn btn-login" value="Submit"></center>
-                                                        </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <div class='col-sm-5'>
+                                                        <label class='control-label ' for='pquan'> Price :</label>
                                                     </div>
+                                                    <div class='col-sm-7'>
+                                                        <input type='number' min='1' class="form-control" id='price' name='price'>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <div class='col-sm-5'>
+                                                        <label class='control-label ' for='pquan'> Date :</label>
+                                                    </div>
+                                                    <div class='col-sm-7'>
+                                                        <input type='date' class="form-control" id='date' name='date'>
+                                                    </div>
+                                                </div>
 
-
-                                                 </form>
-                                            </div>
-                                      </div>
-                                  </div>
-                              </div>
+                                                <div class='form-group'>
+                                                    <div class='col-sm-10'>
+                                                        <center><input type="submit" name="product-submit" id="product-submit"
+                                                        class="form-control btn btn-login" value="Submit"></center>
+                                                    </div>  
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                           <div class="container" >
-                              <div class="panel-group">
-                                  <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                          <h5 class="panel-title">
-                                              <a data-toggle="collapse" href="#col1"><center>LIST OF SUPPLIERS</center></a>
-                                          </h5>
-                                      </div>
-                                      
-                                      <div id="col1" class="panel-collapse collapse">
-                                          <div class="panel-body"></div>
-                                          <div class="panel-footer">
-                                             <table class="table table-striped" style="width:100%">
-                                                <thead >
-                                                    <tr>
-                                                        <th>ID.</th>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Contact</th>
-                                                        <th>Company</th>
-                                                       <!-- <th>Total Cost</th>-->
-                                                        <th>Registered On</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                        $sup= mysqli_query($con, "select * from t_supplier ORDER BY `t_supplier`.`s_id` ASC");
-                                                        while($supp = mysqli_fetch_array($sup))              
-                                                        {
-                                                    ?>
-                                                    <tr>
-                                                        <td><?php echo $supp[0] ?></td>
-                                                        <td><?php echo $supp[1] ?></td>
-                                                        <td><?php echo $supp[3] ?></td>
-                                                        <td><?php echo $supp[4]; echo " , "; echo $supp[5] ?></td>
-                                                        <td><?php echo $supp[6] ?></td>
-                                                        <td><?php echo $supp[7] ?></td>
-                                                        <!--<td>rs.getString("s_regdate")</td>-->
-                                                    </tr>
-                                                        <?php } ?>
-                                                </tbody>
-                                            </table> 
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>     
-                      </div>
-                            
-                            
-                            
-                       
-                     <div id="dea" class="tab-pane fade" >
-                         <div class="container">
-                              <div class="panel-group">
-                                  <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                          <h5 class="panel-title">
-                                              <a data-toggle="collapse" href="#co2"><center>ADD A NEW DEALER</center></a>
-                                          </h5>
-                                      </div>
-                                      
-                                      <div id="co2" class="panel-collapse collapse">
-                                          <div class="panel-body">Enter the details of the new dealer</div>
-                                          <div class="panel-footer">
-                                              <form id="adddlr" class="form-horizontal" action="dashboard.php"  method="post">
-                                                    <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="snm">Name : </label> 
-                                                        <div class="col-sm-10">
-                                                            <input type='text' class="form-control" id='dnm' name='dnm' placeholder="Enter Dealer's Name">
+                                <div class="panel-group">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h5 class="panel-title">
+                                            <a data-toggle="collapse" href="#coo11"><center>Warehouse Purchase Report</center></a>
+                                            </h5>
+                                        </div>
+                                        <div id="coo11" class="panel-collapse collapse">
+                                            <div class="panel-body">Select the range</div>
+                                            <div>
+                                                <form class='form-horizontal'  id="productsold" method="post" action="">
+                                                    <div class='form-group'>
+                                                        <div class='col-sm-5'>
+                                                            <label class='control-label ' for='pbrand1'>From Date :</label>
+                                                        </div>
+                                                        <div class='col-sm-7'>
+                                                            <input type='date' class="form-control" id='warehousefromdate' name='warehousefromdate'>
                                                         </div>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="deml">Email : </label> 
-                                                        <div class="col-sm-10">
-                                                            <input type='email' class="form-control" id='deml' name='deml' placeholder="Enter Dealer's Email">
+                                                    <div class='form-group'>
+                                                        <div class='col-sm-5'>
+                                                            <label class='control-label ' for='pbrand1'>To Date :</label>
+                                                        </div>
+                                                        <div class='col-sm-7'>
+                                                            <input type='date' class="form-control" id='warehousetodate' name='warehousetodate'>
                                                         </div>
                                                     </div>
-
-                                                    <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="dph">Contact : </label> 
-                                                        <div class="col-sm-10">
-                                                            <input type='text' class="form-control" id='dph' name='dph'  placeholder="Enter Dealer's 1st Contact">
-                                                            <br>    <input type='text' class="form-control" id='dph1' name='dph1' placeholder="Enter Dealer's 2nd Contact">
-                                                          </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="control-label col-sm-2" for="dcom">Company : </label> 
-                                                        <div class="col-sm-10">
-                                                            <input type='text' class="form-control" id='dcom' name='dcom' placeholder="Enter Dealer's Company">
-                                                            <input type='hidden' class="form-control" id='dhid' name='dhid'>
-                                                        </div>
-                                                    </div>
-
                                                     <div class='form-group'>
                                                         <div class='col-sm-10'>
-                                                            <center><input type="submit" name="newdea-submit" id="newdea-submit" 
-                                                                    class="form-control btn btn-login" value="Submit"></center>
+                                                            <center><input type="submit" name="showmprd" id="showmprd"
+                                                                    class="form-control btn btn-login" value="Show"></center>
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
-                                      </div>
-                                  </div>
-                              </div>
-                         </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <?php
+                                                $mthch= mysqli_query($con, "select a.date,b.product_name,a.price,a.quantity from productprice a left join product b on a.product_id=b.product_id where a.date BETWEEN '$warehousefromdate' AND '$warehousetodate'");
+
+                                                echo "<hr>" ;
+
+                                                if(isset($_REQUEST["showmprd"]))
+                                                {
+                                                    echo "<table class='table table-bordered'>";
+                                                    echo "<th>Date</th>";
+                                                    echo "<th>Product Name</th>";
+                                                    echo "<th>Cost per Item</th>";
+                                                    echo "<th>Quantity</th>";
+                                                    while($mthc = mysqli_fetch_array($mthch))
+                                                    {
+                                                        echo "<tr>";
+                                                        echo "<td>". $mthc[0]."</td>";
+                                                        echo "<td>". $mthc[1]."</td>";
+                                                        echo "<td>". $mthc[2]."</td>";
+                                                        echo "<td>". $mthc[3]."</td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    echo "<tr>";
+                                                        echo "<td colspan=5>";
+                                                        //echo '<center><a href="mnthlyrcd.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
+                                                        echo "</td>";
+                                                        echo "</tr>";
+                                                    echo "</table>";
+                                                    }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>     
+                        </div>
+                            
+                            
+                            
+                       
+                    <div id="dea" class="tab-pane fade" >
+                        <div class="container">
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" href="#coo200"><center>Restaurant Stock Purchase</center></a>
+                                        </h5>
+                                    </div>
+                                    
+                                    <div id="coo200" class="panel-collapse collapse">
+                                        <div class="panel-body">Enter the details of restaurant stock purchase</div>
+                                        <div class="panel-footer">
+                                            <form class='form-horizontal'  id="productentry" method="post" action="">
+                                                <div class='form-group'>
+                                                    <div class='col-sm-5'>
+                                                        <label class='control-label' for='pname1' > Product Name :</label>
+                                                    </div>
+                                                    <div class='col-sm-7'>
+                                                        <select id='restaurantproductname' name="restaurantproductname" class="pname">
+                                                            <option selected="selected">--Select Category--</option>
+                                                            <?php
+                                                                    $stmt = $DB_con->prepare("SELECT * FROM product");
+                                                                    $stmt->execute();
+                                                                    while($row=$stmt->fetch(PDO::FETCH_ASSOC))
+                                                                    {
+                                                                            ?>
+                                                                    <option value="<?php echo $row['product_name']; ?>"><?php echo $row['product_name']; ?></option>
+                                                                    <?php
+                                                                    }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <div class='col-sm-5'>
+                                                        <label class='control-label' for='pname1' > Restaurant Name :</label>
+                                                    </div>
+                                                    <div class='col-sm-7'>
+
+                                                        <select  id='restaurant_name' name="restaurant_name" class="pname1">
+                                                            <option selected="selected">--Select Category--</option>
+                                                            <?php
+                                                                    $stmt1 = $DB_con->prepare("SELECT * FROM restaurant");
+                                                                    $stmt1->execute();
+                                                                    while($row=$stmt1->fetch(PDO::FETCH_ASSOC))
+                                                                    {
+                                                                            ?>
+                                                                    <option value="<?php echo $row['restaurant_name']; ?>"><?php echo $row['restaurant_name']; ?></option>
+                                                                    <?php
+                                                                    }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <div class='col-sm-5'>
+                                                        <label class='control-label ' for='pbrand1'>Quantity</label>
+                                                    </div>
+                                                    <div class='col-sm-7'>
+                                                        <input type='text' class="form-control" id='restaurantquantity' name='restaurantquantity'>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <div class='col-sm-5'>
+                                                        <label class='control-label ' for='pbrand1'>Date</label>
+                                                    </div>
+                                                    <div class='col-sm-7'>
+                                                        <input type='date' class="form-control" id='restaurantpurchasedate' name='restaurantpurchasedate'>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <div class='col-sm-10'>
+                                                        <center><input type="submit" name="product-submit1" id="product-submit1"
+                                                                class="form-control btn btn-login" value="Submit"></center>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                          
                         
                         <div class="container">
-                              <div class="panel-group">
-                                  <div class="panel panel-default">
-                                      <div class="panel-heading">
-                                          <h5 class="panel-title">
-                                              <a data-toggle="collapse" href="#col2"><center>LIST OF DEALERS</center></a>
-                                          </h5>
-                                      </div>
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" href="#col2"><center>List of Restaurants</center></a>
+                                        </h5>
+                                    </div>
                                       
-                                      <div id="col2" class="panel-collapse collapse">
-                                          <div class="panel-body"></div>
-                                          <div class="panel-footer">
-                                             <table class="table table-striped" style="width:100%">
-                                                <thead >
-                                                    <tr>
-                                                        <th>ID.</th>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Company</th>
-                                                        <th>Contact</th>
-                                                        
-                                                        <!--<th>Total Cost</th>-->
-                                                        <th>Registered On</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
+                                    <div id="col2" class="panel-collapse collapse">
+                                        <div class="panel-body"></div>
+                                        <div class="panel-footer">
+                                            <table class="table table-striped" style="width:100%">
+                                            <thead >
+                                                <tr>
+                                                    <th>Restaurant Name</th>
+                                                    <th>Address</th>
+                                                    <th>Mobile</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                                   <?php
-                                                        $dea= mysqli_query($con, "select * from t_dealer ORDER BY `t_dealer`.`d_id` ASC");
-                                                        while($deal = mysqli_fetch_array($dea))              
-                                                        {
-                                                    ?>
-                                                    <tr>
-                                                        <td><?php echo $deal[0] ?></td>
-                                                        <td><?php echo $deal[1] ?></td>
-                                                        <td><?php echo $deal[3] ?></td>
-                                                        <td><?php echo $deal[4];?></td>
-                                                        <td><?php echo $deal[6];  echo " , "; echo $deal[5] ?></td>
-                                                        <td><?php echo $deal[7] ?></td>
-                                                        <!--<td>rs.getString("s_regdate")</td>-->
-                                                    </tr>
-                                                        <?php } ?>
-                                                   
-                                                </tbody>
+                                                <?php
+                                                    $dea= mysqli_query($con, "select * from restaurant");
+                                                    while($deal = mysqli_fetch_array($dea))              
+                                                    {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $deal[1] ?></td>
+                                                    <td><?php echo $deal[2] ?></td>
+                                                    <td><?php echo $deal[3] ?></td>
+                                                </tr>
+                                                    <?php } ?>
+                                                
+                                            </tbody>
                                             </table>     
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>      
-                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+
+                        <div class="container">
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5 class="panel-title">
+                                            <a data-toggle="collapse" href="#coo201"><center>Restaurant Purchase Report</center></a>
+                                        </h5>
+                                    </div>
+                                    
+                                    <div id="coo201" class="panel-collapse collapse">
+                                        <div class="panel-body">Select the Range</div>
+                                        <div class="panel-footer">
+                                        <form class='form-horizontal'  id="productsold" method="post" action="">
+                                                    <div class='form-group'>
+                                                        <div class='col-sm-5'>
+                                                            <label class='control-label' for='pname1' > Restaurant Name :</label>
+                                                        </div>
+                                                        <div class='col-sm-7'>
+
+                                                            <select  id='res_pur_name' name="res_pur_name" class="pname1">
+                                                                <option selected="selected">--Select Category--</option>
+                                                                <?php
+                                                                        $stmt1 = $DB_con->prepare("SELECT * FROM restaurant");
+                                                                        $stmt1->execute();
+                                                                        while($row=$stmt1->fetch(PDO::FETCH_ASSOC))
+                                                                        {
+                                                                                ?>
+                                                                        <option value="<?php echo $row['restaurant_name']; ?>"><?php echo $row['restaurant_name']; ?></option>
+                                                                        <?php
+                                                                        }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class='form-group'>
+                                                        <div class='col-sm-5'>
+                                                            <label class='control-label ' for='pbrand1'>From Date :</label>
+                                                        </div>
+                                                        <div class='col-sm-7'>
+                                                            <input type='date' class="form-control" id='res_pur_fromdate' name='res_pur_fromdate'>
+                                                        </div>
+                                                    </div>
+                                                    <div class='form-group'>
+                                                        <div class='col-sm-5'>
+                                                            <label class='control-label ' for='pbrand1'>To Date :</label>
+                                                        </div>
+                                                        <div class='col-sm-7'>
+                                                            <input type='date' class="form-control" id='res_pur_todate' name='res_pur_todate'>
+                                                        </div>
+                                                    </div>
+                                                    <div class='form-group'>
+                                                        <div class='col-sm-10'>
+                                                            <center><input type="submit" name="showrespur" id="showrespur"
+                                                                    class="form-control btn btn-login" value="Show"></center>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                </div>
+                                        </div>
+                                        <div class="panel-footer">
+                                            <?php
+                                                if(isset($_REQUEST["showrespur"]))
+                                                {
+                                                    $r_id= mysqli_query($con,"select restaurant_id from restaurant WHERE restaurant_name='$res_pur_name'");
+                                                    $r_id1=  mysqli_fetch_assoc($r_id);
+                                                    $restaurant_id= $r_id1['restaurant_id'];
+
+                                                    $mthch= mysqli_query($con, "select a.purchase_date AS 'Date',b.product_name AS 'Product Name',a.quantity as 'Quantity' from restaurant_stock a left join product b on a.product_id=b.product_id WHERE a.restaurant_id=$restaurant_id AND a.purchase_date BETWEEN '$res_pur_fromdate' AND '$res_pur_todate'");
+
+                                                    echo "<hr>" ;
+                                                    echo "<table class='table table-bordered'>";
+                                                    echo "<th>Date</th>";
+                                                    echo "<th>Product Name</th>";
+                                                    echo "<th>Quantity</th>";
+                                                    while($mthc = mysqli_fetch_array($mthch))
+                                                    {
+                                                        echo "<tr>";
+                                                        echo "<td>". $mthc[0]."</td>";
+                                                        echo "<td>". $mthc[1]."</td>";
+                                                        echo "<td>". $mthc[2]."</td>";
+                                                        echo "</tr>";
+                                                    }
+                                                    echo "<tr>";
+                                                        echo "<td colspan=5>";
+                                                        //echo '<center><a href="mnthlyrcd.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
+                                                        echo "</td>";
+                                                        echo "</tr>";
+                                                    echo "</table>";
+                                                    }
+                                            ?>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>                             
+
+                    </div>
+                        
+
             
                   <div id="tran" class="tab-pane fade" >
                     <form id="viewtran">
