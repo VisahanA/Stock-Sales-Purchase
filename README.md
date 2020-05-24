@@ -5,7 +5,7 @@ How to run this application ?
 2)Go to Htdocs in Xampp <br>
 3)Clone the project <br>
 4)Import the database from warehouse.sql <br>
-5)Ypur product is ready to run <br>
+5)Your product is ready to run <br>
 
 P.S :-  In order to use localhost we have to turn mysql server and Apache server of XAMPP.
 
