@@ -1108,7 +1108,8 @@ $("#cat").hide();
                                            <?php       
                                            echo "<hr>" ;
                                            echo "<table class='table table-bordered'>";
-                                           echo "<th> Product's Category </th>";
+                                           echo "<th> Product Name </th>";
+                                           echo "<th> Quantity </th>";
                                            echo "<th> Total Cost (Rs.)</th>";
                                            echo "<th> Average Cost (Rs.)</th>";
                                            echo "<th> Maximum Cost (Rs.)</th>";
@@ -1127,7 +1128,7 @@ $("#cat").hide();
                                            
                                           
                                               echo "<tr>";
-                                              echo "<td colspan=5>";
+                                              echo "<td colspan=6>";
                                               echo '<center><a href="tpurtrans.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
                                               echo "</td>";
                                               echo "</tr>";
@@ -1154,7 +1155,8 @@ $("#cat").hide();
                                            <?php
                                            echo "<hr>" ;
                                            echo "<table class='table table-bordered'>";
-                                           echo "<th> Product's Category </th>";
+                                           echo "<th> Product Name </th>";
+                                           echo "<th> Quantity </th>";
                                            echo "<th> Total Cost (Rs.)</th>";
                                            echo "<th> Average Cost (Rs.)</th>";
                                            echo "<th> Maximum Cost (Rs.)</th>";
@@ -1171,7 +1173,7 @@ $("#cat").hide();
                                            }
                                            
                                            echo "<tr>";
-                                              echo "<td colspan=5>";
+                                              echo "<td colspan=6>";
                                               echo '<center><a href="tsaletrans.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
                                               echo "</td>";
                                               echo "</tr>";
