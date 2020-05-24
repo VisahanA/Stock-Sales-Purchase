@@ -1131,36 +1131,7 @@ $("#cat").hide();
                                               echo '<center><a href="tpurtrans.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
                                               echo "</td>";
                                               echo "</tr>";
-                                              echo "</table>";
-                                           
-                                           $datepur = mysqli_query($con,"SELECT substring(p_tdate,4,3), SUM(tot_cost),AVG(tot_cost),
-                                               MAX(tot_cost),MIN(tot_cost) FROM t_purtrans INNER JOIN t_product ON 
-                                               t_purtrans.p_id=t_product.p_id group by substring(p_tdate,4,3)");
-                                           echo "<br><hr><center>TOTAL PURCHASE TILL DATE(ACCORDING TO MONTHS)</center>" ;
-                                                  
-                                           echo "<hr>" ;
-                                           echo "<table class='table table-bordered'>";
-                                           echo "<th> Month </th>";
-                                           echo "<th> Total Cost (Rs.)</th>";
-                                           echo "<th> Average Cost (Rs.)</th>";
-                                           echo "<th> Maximum Cost (Rs.)</th>";
-                                           echo "<th> Minimum Cost (Rs.)</th>";
-                                           while($dateval=mysqli_fetch_array($datepur))
-                                           {
-                                              echo "<tr>";
-                                              echo "<td>". $dateval['substring(p_tdate,4,3)'] . "</td>";
-                                              echo "<td>". $dateval['SUM(tot_cost)']."</td>";
-                                              echo "<td>". $dateval['AVG(tot_cost)']."</td>";
-                                              echo "<td>". $dateval['MAX(tot_cost)']."</td>";
-                                              echo "<td>". $dateval['MIN(tot_cost)']."</td>";
-                                              echo "</tr>";
-                                           }
-                                           echo "<tr>";
-                                              echo "<td colspan=5>";
-                                              echo '<center><a href="tpurtrm.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
-                                              echo "</td>";
-                                              echo "</tr>";
-                                           echo "</table>";
+                                              echo "</table>";                                          
                                           ?>
                                       </div>
                                 </div><br>
@@ -1204,124 +1175,10 @@ $("#cat").hide();
                                               echo '<center><a href="tsaletrans.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
                                               echo "</td>";
                                               echo "</tr>";
-                                           echo "</table>";
-                                           
-                                           $datesal = mysqli_query($con,"SELECT substring(s_tdate,4,3), SUM(p_stot_cost),AVG(p_stot_cost),MAX(p_stot_cost),MIN(p_stot_cost) FROM t_saletrans INNER JOIN t_soldprd ON t_saletrans.p_sid=t_soldprd.p_sid group by substring(s_tdate,4,3)");
-                                           echo "<br><hr><center>TOTAL SALES TILL DATE (ACCORDING TO MONTHS)</center>" ;
+                                           echo "</table>";   
                                            ?>
-                                          
-                                           <?php       
-                                           echo "<hr>" ;
-                                           echo "<table class='table table-bordered'>";
-                                           echo "<th> Month </th>";
-                                           echo "<th> Total Cost (Rs.)</th>";
-                                           echo "<th> Average Cost (Rs.)</th>";
-                                           echo "<th> Maximum Cost (Rs.)</th>";
-                                           echo "<th> Minimum Cost (Rs.)</th>";
-                                           while($datesa=mysqli_fetch_array($datesal))
-                                           {
-                                              echo "<tr>";
-                                              echo "<td>". $datesa['substring(s_tdate,4,3)'] . "</td>";
-                                              echo "<td>". $datesa['SUM(p_stot_cost)']."</td>";
-                                              echo "<td>". $datesa['AVG(p_stot_cost)']."</td>";
-                                              echo "<td>". $datesa['MAX(p_stot_cost)']."</td>";
-                                              echo "<td>". $datesa['MIN(p_stot_cost)']."</td>";
-                                              echo "</tr>";
-                                           }
-                                           echo "<tr>";
-                                              echo "<td colspan=5>";
-                                              echo '<center> <a href="tsalem.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
-                                              echo "</td>";
-                                              echo "</tr>";
-                                           echo "</table>";
-                                           
-                                            ?>
                                     </div>
-                                </div><br>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"><center><h4> BEST SUPPLIER</h4></center>   </div>
-                                    <div class="panel-body">
-                                    <?php 
-                                           $bestsp = mysqli_query($con,"SELECT s_email, SUM(tot_cost),MAX(tot_cost),MIN(tot_cost) FROM t_purtrans INNER JOIN t_product ON t_purtrans.p_id=t_product.p_id group by (s_email) order by sum(tot_cost) DESC");
-                                           $trcount=0;                                           
-                                           echo "<br><center>PURCHASES FROM THE SUPPLIERS</center>" ;
-                                           ?>
-                                           
-                                           <?php       
-                                           echo "<hr>";
-                                           echo "<table class='table table-bordered'>";
-                                           echo "<th> Rank </th>";
-                                           echo "<th> Supplier's Name</th>";
-                                           echo "<th> Total Purchase(Rs.)</th>";
-                                           echo "<th> Maximum Purchase Price (Rs.)</th>";
-                                           echo "<th> Minimum Purchase Price (Rs.)</th>";
-                                          
-                                           while($bests=mysqli_fetch_array($bestsp))
-                                           {
-                                               $s2=mysqli_query($con,"select s_name from t_supplier where s_email='".$bests['s_email']."'");
-                                               $ss2=  mysqli_fetch_assoc($s2);
-                                               $spname= $ss2['s_name'];
-                                              echo "<tr>";
-                                              echo "<td>". ++$trcount .".</td>";
-                                              echo "<td>". $spname . "</td>";
-                                              echo "<td>". $bests['SUM(tot_cost)']."</td>";
-                                              echo "<td>". $bests['MAX(tot_cost)']."</td>";
-                                              echo "<td>". $bests['MIN(tot_cost)']."</td>";
-                                              echo "</tr>";
-                                           }
-                                           echo "<tr>";
-                                              echo "<td colspan=5>";
-                                              echo '<center><a href="tsupl.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
-                                              echo "</td>";
-                                              echo "</tr>";
-                                           echo "</table>";
-                                           
-                                            ?>
-                                    
-                                    </div>
-                                </div><br>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading"> <center><h4>BEST DEALER </h4></center></div>
-                                    <div class="panel-body">
-                                        <?php 
-                                           $bestdl = mysqli_query($con,"SELECT d_email, SUM(p_stot_cost),MAX(p_stot_cost),MIN(p_stot_cost) FROM t_saletrans INNER JOIN t_soldprd ON t_saletrans.p_sid=t_soldprd.p_sid group by (d_email) order by sum(p_stot_cost) DESC");
-                                           $dlcount=0;                                           
-                                           echo "<br><hr><center> SALES TO THE DEALERS</center>" ;
-                                           ?>
-                                           
-                                           <?php       
-                                           echo "<hr>";
-                                           echo "<table class='table table-bordered'>";
-                                           echo "<th> Rank </th>";
-                                           echo "<th> Dealer's Name</th>";
-                                           echo "<th> Total Sales(Rs.)</th>";
-                                           echo "<th> Maximum Sales Price (Rs.)</th>";
-                                           echo "<th> Minimum Sales Price (Rs.)</th>";
-                                          
-                                           while($bestd=mysqli_fetch_array($bestdl))
-                                           {
-                                               $d2=mysqli_query($con,"select d_name from t_dealer where d_email='".$bestd['d_email']."'");
-                                               $dd2=  mysqli_fetch_assoc($d2);
-                                               $dlname= $dd2['d_name'];
-                                              echo "<tr>";
-                                              echo "<td>". ++$dlcount .".</td>";
-                                              echo "<td>". $dlname . "</td>";
-                                              echo "<td>". $bestd['SUM(p_stot_cost)']."</td>";
-                                              echo "<td>". $bestd['MAX(p_stot_cost)']."</td>";
-                                              echo "<td>". $bestd['MIN(p_stot_cost)']."</td>";
-                                              echo "</tr>";
-                                           }
-                                           echo "<tr>";
-                                              echo "<td colspan=5>";
-                                              echo '<center><a href="tdeal.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
-                                              echo "</td>";
-                                              echo "</tr>";
-                                           echo "</table>";
-                                           
-                                            ?>
-                                    
-                                    </div>
-                                </div><br>
+                                </div><br>  
                              </div>
                         </div>
                     </form>
