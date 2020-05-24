@@ -1,6 +1,6 @@
 <?php 
 error_reporting(0);
-$con = mysqli_connect("localhost", "root", "", "warehouse");
+$con = mysqli_connect("localhost", "root", "", "warehouse_management");
 if(!isset($con))
 {
     die("Database Not Found");
@@ -10,9 +10,8 @@ if(!isset($con))
 $gtrdet1 = mysqli_fetch_assoc($gtrdet);
 $setExcelName = $gtrdet1["e_title"];
 */			
-$setExcelName = "TOTAL PURCHASE TRANSACTION(Category)";
-$setSql = mysqli_query($con,  "SELECT Ucase(p_name) AS 'PRODUCT CATEGORY', SUM(tot_cost) AS 'Total Cost (Rs.)',AVG(tot_cost) AS 'Average Cost (Rs.)' ,MAX(tot_cost) AS 'Maximum Cost (Rs.)'
-                                ,MIN(tot_cost) AS 'Minimum Cost (Rs.)' FROM `t_product` group by p_name");
+$setExcelName = "TOTAL PURCHASE TRANSACTION(Product)";
+$setSql = mysqli_query($con,  "select b.product_name as 'Product Name',SUM(a.quantity) as 'Quantity',SUM(a.quantity*a.price) as 'Total Cost',AVG(a.price) as 'Average Cost per Unit',MAX(a.price) as 'Maximum Cost per Unit',MIN(a.price) as 'Minimum Cost per Unit' from productprice a inner join product b on a.product_id=b.product_id GROUP BY a.product_id");
     
 $setCounter = mysqli_num_fields($setSql);
 

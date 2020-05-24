@@ -1091,18 +1091,17 @@ $("#cat").hide();
                                     </div>
                                     <div class="panel-body">
                                          <?php 
-                                           $totpur = mysqli_query($con,"SELECT SUM(tot_cost) FROM `t_product`");
-                                          
-                                         
+                                           $totpur = mysqli_query($con,"select b.product_name as 'Product Name',SUM(a.quantity) as 'Quantity',SUM(a.quantity*a.price) as 'Total Cost' from productprice a inner join product b on a.product_id=b.product_id GROUP BY a.product_id");
+                                           $totalcost = 0;
                                            while($purval=mysqli_fetch_array($totpur))
                                            {
-                                           echo "<h4>Total purchase price till date :<b> Rs. ". $purval['SUM(tot_cost)']."</b></h4>";
+                                               $totalcost=$totalcost+$purval['Total Cost'];
                                            }
-                                           echo '<br>';
+                                           echo "<h4>Total purchase price till date :<b> Rs. ". $totalcost."</b></h4>";
                                            
-                                           $namepur = mysqli_query($con,"SELECT Ucase(p_name), SUM(tot_cost),AVG(tot_cost),MAX(tot_cost),
-                                               MIN(tot_cost) FROM `t_product` group by p_name");
-                                           echo "<br><center>TOTAL PURCHASE TILL DATE (ACCORDING TO PRODUCT'S CATEGORY)</center>";
+                                           echo '<br>';
+                                           $namepur = mysqli_query($con,"select b.product_name as 'Product Name',SUM(a.quantity) as 'Quantity',SUM(a.quantity*a.price) as 'Total Cost',AVG(a.price) as 'Average Cost per Unit',MAX(a.price) as 'Maximum Cost per Unit',MIN(a.price) as 'Minimum Cost per Unit' from productprice a inner join product b on a.product_id=b.product_id GROUP BY a.product_id");
+                                           echo "<br><center>TOTAL PURCHASE TILL DATE (ACCORDING TO PRODUCT)</center>";
                                             ?>
                                            
                                            <?php       
@@ -1117,11 +1116,12 @@ $("#cat").hide();
                                            while($nameval=mysqli_fetch_array($namepur))
                                            {
                                               echo "<tr>";
-                                              echo "<td>". $nameval['Ucase(p_name)'] . "</td>";
-                                              echo "<td>". $nameval['SUM(tot_cost)']."</td>";
-                                              echo "<td>". $nameval['AVG(tot_cost)']."</td>";
-                                              echo "<td>". $nameval['MAX(tot_cost)']."</td>";
-                                              echo "<td>". $nameval['MIN(tot_cost)']."</td>";
+                                              echo "<td>". $nameval['Product Name'] . "</td>";
+                                              echo "<td>". $nameval['Quantity'] . "</td>";
+                                              echo "<td>". $nameval['Total Cost']."</td>";
+                                              echo "<td>". $nameval['Average Cost per Unit']."</td>";
+                                              echo "<td>". $nameval['Maximum Cost per Unit']."</td>";
+                                              echo "<td>". $nameval['Minimum Cost per Unit']."</td>";
                                               echo "</tr>";
                                               
                                            }
@@ -1140,40 +1140,35 @@ $("#cat").hide();
                                     <div class="panel-heading"> <center><h4>TOTAL SALES TRANSACTION</h4></center></div>
                                     <div class="panel-body">
                                         <?php 
-                                           $totsal = mysqli_query($con,"SELECT SUM(p_stot_cost) FROM `t_soldprd`");
+                                        //    $totsal = mysqli_query($con,"SELECT SUM(p_stot_cost) FROM `t_soldprd`");
                                            
-                                           while($salval=mysqli_fetch_array($totsal))
-                                           {
-                                           echo "<h4>Total sales till date :<b> Rs. ". $salval['SUM(p_stot_cost)']."</b></h4>";
-                                           }
-                                           echo '<br>';
+                                        //    while($salval=mysqli_fetch_array($totsal))
+                                        //    {
+                                        //    echo "<h4>Total sales till date :<b> Rs. ". $salval['SUM(p_stot_cost)']."</b></h4>";
+                                        //    }
+                                        //    echo '<br>';
                                                                                   
-                                           $namesal = mysqli_query($con,"SELECT Ucase(p_sname), SUM(p_stot_cost),AVG(p_stot_cost),MAX(p_stot_cost),MIN(p_stot_cost) FROM `t_soldprd` group by p_sname");
-                                           echo "<br><center>TOTAL PURCHASE TILL DATE(ACCORDING TO PRODUCT'S CATEGORY)</center>" ;
+                                           $namesal = mysqli_query($con,"select b.restaurant_name as 'Restaurant Name',c.product_name as 'Product Name',SUM(a.quantity) as 'Quantity' from restaurant_stock a inner join restaurant b on a.restaurant_id=b.restaurant_id inner join product c on c.product_id=a.product_id GROUP BY a.product_id");
+                                           echo "<br><center>TOTAL PURCHASE TILL DATE(ACCORDING TO PRODUCT)</center>" ;
                                             ?>
                                            
                                            <?php
                                            echo "<hr>" ;
                                            echo "<table class='table table-bordered'>";
+                                           echo "<th> Restaurant Name </th>";
                                            echo "<th> Product Name </th>";
                                            echo "<th> Quantity </th>";
-                                           echo "<th> Total Cost (Rs.)</th>";
-                                           echo "<th> Average Cost (Rs.)</th>";
-                                           echo "<th> Maximum Cost (Rs.)</th>";
-                                           echo "<th> Minimum Cost (Rs.)</th>";
                                            while($nameva=mysqli_fetch_array($namesal))
                                            {
                                               echo "<tr>";
-                                              echo "<td>". $nameva['Ucase(p_sname)'] . "</td>";
-                                              echo "<td>". $nameva['SUM(p_stot_cost)']."</td>";
-                                              echo "<td>". $nameva['AVG(p_stot_cost)']."</td>";
-                                              echo "<td>". $nameva['MAX(p_stot_cost)']."</td>";
-                                              echo "<td>". $nameva['MIN(p_stot_cost)']."</td>";
+                                              echo "<td>". $nameva['Restaurant Name'] . "</td>";
+                                              echo "<td>". $nameva['Product Name']."</td>";
+                                              echo "<td>". $nameva['Quantity'] . "</td>";
                                               echo "</tr>";
                                            }
                                            
                                            echo "<tr>";
-                                              echo "<td colspan=6>";
+                                              echo "<td colspan=3>";
                                               echo '<center><a href="tsaletrans.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>';
                                               echo "</td>";
                                               echo "</tr>";
