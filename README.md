@@ -3,7 +3,7 @@ How to run this application ?
 
 1)Install Xampp <br>
 2)Go to Htdocs in Xampp <br>
-3)Clone the project <br>
+3)Clone or download the project repository <br>
 4)Import the database from warehouse.sql <br>
 5)Your product is ready to run <br>
 
