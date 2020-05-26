@@ -7,49 +7,49 @@
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+-- SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- SET time_zone = "+00:00";
 
 
-CREATE TABLE IF NOT EXISTS `warehouse_details` (
-  `product_id` bigint(20) NOT NULL,
-  `product_name` varchar(20) NOT NULL,
-  `quantity` bigint(20) NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE IF NOT EXISTS `warehouse_details` (
+--   `product_id` bigint(20) NOT NULL,
+--   `product_name` varchar(20) NOT NULL,
+--   `quantity` bigint(20) NOT NULL,
+--   PRIMARY KEY (`product_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `product` (
-  `product_id` bigint(20) NOT NULL,
-  `product_name` varchar(20) NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE IF NOT EXISTS `product` (
+--   `product_id` bigint(20) NOT NULL,
+--   `product_name` varchar(20) NOT NULL,
+--   PRIMARY KEY (`product_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `productprice` (
-  `product_price_id` bigint(20) NOT NULL,
-  `date` date NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `price` float(20) NOT NULL,
-  `quantity` bigint(20) NOT NULL,
-  PRIMARY KEY (`product_price_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE IF NOT EXISTS `productprice` (
+--   `product_price_id` bigint(20) NOT NULL,
+--   `date` date NOT NULL,
+--   `product_id` bigint(20) NOT NULL,
+--   `price` float(20) NOT NULL,
+--   `quantity` bigint(20) NOT NULL,
+--   PRIMARY KEY (`product_price_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `restaurant` (
-  `restaurant_id` bigint(20) NOT NULL,
-  `restaurant_name` date NOT NULL,
-  `address`varchar(20) NOT NULL,
-  `mobile` varchar(20) NOT NULL,
-  `quantity` varchar(20) NOT NULL,
-  PRIMARY KEY (`restaurant_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE IF NOT EXISTS `restaurant` (
+--   `restaurant_id` bigint(20) NOT NULL,
+--   `restaurant_name` date NOT NULL,
+--   `address`varchar(20) NOT NULL,
+--   `mobile` varchar(20) NOT NULL,
+--   `quantity` varchar(20) NOT NULL,
+--   PRIMARY KEY (`restaurant_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE IF NOT EXISTS `restaurant_stock` (
-  `restaurant_product_id` bigint(20) NOT NULL,
-  `product_id` bigint(20) NOT NULL,
-  `quantity`bigint(20) NOT NULL,
-  `restaurant_id` bigint(20) NOT NULL,
-  `purchase_date` date NOT NULL,
-  PRIMARY KEY (`restaurant_product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- CREATE TABLE IF NOT EXISTS `restaurant_stock` (
+--   `restaurant_product_id` bigint(20) NOT NULL,
+--   `product_id` bigint(20) NOT NULL,
+--   `quantity`bigint(20) NOT NULL,
+--   `restaurant_id` bigint(20) NOT NULL,
+--   `purchase_date` date NOT NULL,
+--   PRIMARY KEY (`restaurant_product_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `t_user` (
   `a_id` varchar(50) NOT NULL,
@@ -66,4 +66,4 @@ CREATE TABLE IF NOT EXISTS `t_user` (
 --
 
 INSERT INTO `t_user` (`a_id`, `a_name`, `a_email`, `a_pswd`, `a_phno`, `a_company`) VALUES
-('1', 'visahan', 'visahan.vnr@gmail.com', '123', '9831456781', 'amazon');
+('1', 'visahan', 'sanstechno27@gmail.com', '123', '9831456781', 'Sanstechno');

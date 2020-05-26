@@ -512,7 +512,7 @@ $("#cat").hide();
             <a href='logout.php'>
                              LOGOUT
                             </a>
-        <img src="images/catergory-banner-electronics.png">
+        <!-- <img src="images/sanstechno.jpeg"> -->
         </div>
        </center> <br>
         
