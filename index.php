@@ -31,7 +31,7 @@ if(isset($_REQUEST["newlogin"]))
         if($res)
         {
             $_SESSION['ad'] = $slgid;
-            header('location:dashboard.php');
+            header('location:layout.php');
         }
         
         else if($res1)
@@ -69,7 +69,7 @@ if(isset($_REQUEST["newlogin"]))
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         
-        <title>ELECTRONIC WAREHOUSE MANAGEMENT SYSTEM</title>
+        <title>WAREHOUSE MANAGEMENT SYSTEM</title>
         
         <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="bootstrap/bootstrap-theme.min.css">
