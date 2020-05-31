@@ -357,12 +357,12 @@ $("#cat").hide();
 <title>Admin's Dashboard</title>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+<link rel="stylesheet" href="dashboard.css">
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+<body onload="catdisplay()">
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top text-white">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -372,7 +372,7 @@ $("#cat").hide();
         <span class="menu-collapsed"></span>
     </a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" data-toggle="pill" href="#stock_available">Home <span class="sr-only">(current)</span></a>
             </li>
@@ -389,6 +389,9 @@ $("#cat").hide();
             <!-- This menu is hidden in bigger devices with d-sm-none. 
            The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
         </ul>
+    <span class="navbar-text">
+      Username 
+    </span>
     </div>
 </nav>
 <!-- NavBar END -->
@@ -517,132 +520,123 @@ $("#cat").hide();
             </div>  
     </div>
     <!-- Stock Availability -->
-    <div id="stock_available" class="tab-pane fade show active">
+    <div id="stock_available" class="tab-pane fade show active" onClick="catdisplay">
         <div class="panel-body">
             Arrange according to :
-            <input type="button" name="orderby" id="orderby" value="Product ID" class="btn btn-link">
-            <input type="button" name="orderby1" id="orderby1" value="Product Name" class="btn btn-link">
-            <input type="button" name="orderby2" id="orderby2" value="Quantity" class="btn btn-link">
+            <input type="button"  id="orderby" value="Product ID" class="btn btn-link" onClick="catdisplay()">
+            <input type="button"  id="orderby1" value="Product Name" class="btn btn-link" onClick="brndisplay()">
+            <input type="button"  id="orderby2" value="Quantity" class="btn btn-link" onClick="cstdisplay()">
         </div>
-        <form class='form-horizontal' id="stockav" method="post">
-            <span>
-                <?php
-                    $av= mysqli_query($con, "select COUNT(*) AS rows from warehouse_details");
-                    $res=  mysqli_fetch_assoc($av);
-                    $row=$res['rows'];
-                ?>
-            </span>
-                
-            <div class="panel-footer" id="cat">
+        <form class='form-horizontal' id="stockav" method="post">    
+                    <div class="panel-footer" id="cat" >
+                    <table class="table table-striped" style="width:100%">
+                        <thead >
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-            <table class="table table-striped" style="width:100%">
-                <thead >
-                    <tr>
-                        <th>Product ID</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                <?php
-                $avpr= mysqli_query($con, "select * from warehouse_details ORDER BY `warehouse_details`.`product_id` ASC");
-                while($avprr = mysqli_fetch_array($avpr))
-                {
-                ?>
-                <tr>
-                <td><?php echo $avprr[0] ?></td>
-                <td><?php echo $avprr[1] ?></td>
-                <td><?php echo $avprr[2] ?></td>
-                <td><input name="checkbox[]" type="checkbox" id="checkbox[]"
-                value="<?php echo  $avprr[0] ; ?>"></td>
-                </tr>
-                <?php
-                }
-                ?>
-                <tr>
-                <td colspan="7">
-                <center><a href="stockscategory.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>
-                </td>
-                </tr>
-                </tbody>
-                </table>
-                </div>
-
-                <div class="panel-footer" id="brn" hidden>
-                <table class="table table-striped" style="width:100%">
-                    <thead >
+                        <?php
+                        $avpr= mysqli_query($con, "select * from warehouse_details ORDER BY `warehouse_details`.`product_id` ASC");
+                        while($avprr = mysqli_fetch_array($avpr))
+                        {
+                        ?>
                         <tr>
-                            <th>Product ID</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
+                        <td><?php echo $avprr[0] ?></td>
+                        <td><?php echo $avprr[1] ?></td>
+                        <td><?php echo $avprr[2] ?></td>
+                        <td><input name="checkbox[]" type="checkbox" id="checkbox[]"
+                        value="<?php echo  $avprr[0] ; ?>"></td>
                         </tr>
-                    </thead>
-                    <tbody>
-
-
-                    <?php
-                    $avpr1= mysqli_query($con, "select * from warehouse_details ORDER BY `warehouse_details`.`product_name` ASC");
-                                    while($avprr1 = mysqli_fetch_array($avpr1))
-                    {
-                    ?>
-
-                    <tr>
-                    <td><?php echo $avprr1[0] ?></td>
-                    <td><?php echo $avprr1[1] ?></td>
-                    <td><?php echo $avprr1[2] ?></td>
-                    <td><input name="checkbox[]" type="checkbox" id="checkbox[]"
-                    value="<?php echo  $avprr1[0] ; ?>"></td>
-                    </tr>
-                    <?php
-                    }
-                    ?>
-                    <tr>
-                    <td colspan="7">
-                    <center><a href="stocksbrand.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>
-                    </td>
-                    </tr>
-                    </tbody>
-                    </table>
-                    </div>
-
-
-                    <div class="panel-footer" id="cst" hidden>
-                <table class="table table-striped" style="width:100%">
-                    <thead >
+                        <?php
+                        }
+                        ?>
                         <tr>
-                            <th>Product ID</th>
-                            <th>Product Name</th>
-                            <th>Quantity</th>
+                        <td colspan="7">
+                        <center><a href="stockscategory.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>
+                        </td>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </tbody>
+                        </table>
+                        </div>
 
-                    <?php
+                        <div class="panel-footer" id="brn"  >
+                        <table class="table table-striped" style="width:100%">
+                            <thead >
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                    $avpr2= mysqli_query($con, "select * from warehouse_details ORDER BY `warehouse_details`.`quantity` ASC");
-                    while($avprr2 = mysqli_fetch_array($avpr2))
-                    {
-                    ?>
-                    <tr>
-                    <td><?php echo $avprr2[0] ?></td>
-                    <td><?php echo $avprr2[1] ?></td>
-                    <td><?php echo $avprr2[2] ?></td>
-                    <td><input name="checkbox[]" type="checkbox" id="checkbox[]"
-                    value="<?php echo  $avprr2[0] ; ?>"></td>
-                    </tr>
-                    <?php
-                    }
-                    ?>
-                    <tr>
-                    <td colspan="7">
-                    <center><a href="stockscostpi.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>
-                    </td>
-                </tr>
-                </tbody>
-                </table>
-            </div>                            
-        </form>
+
+                            <?php
+                            $avpr1= mysqli_query($con, "select * from warehouse_details ORDER BY `warehouse_details`.`product_name` ASC");
+                                            while($avprr1 = mysqli_fetch_array($avpr1))
+                            {
+                            ?>
+
+                            <tr>
+                            <td><?php echo $avprr1[0] ?></td>
+                            <td><?php echo $avprr1[1] ?></td>
+                            <td><?php echo $avprr1[2] ?></td>
+                            <td><input name="checkbox[]" type="checkbox" id="checkbox[]"
+                            value="<?php echo  $avprr1[0] ; ?>"></td>
+                            </tr>
+                            <?php
+                            }
+                            ?>
+                            <tr>
+                            <td colspan="7">
+                            <center><a href="stocksbrand.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>
+                            </td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            </div>
+
+
+                            <div class="panel-footer" id="cst" >
+                        <table class="table table-striped" style="width:100%">
+                            <thead >
+                                <tr>
+                                    <th>Product ID</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <?php
+
+                            $avpr2= mysqli_query($con, "select * from warehouse_details ORDER BY `warehouse_details`.`quantity` ASC");
+                            while($avprr2 = mysqli_fetch_array($avpr2))
+                            {
+                            ?>
+                            <tr>
+                            <td><?php echo $avprr2[0] ?></td>
+                            <td><?php echo $avprr2[1] ?></td>
+                            <td><?php echo $avprr2[2] ?></td>
+                            <td><input name="checkbox[]" type="checkbox" id="checkbox[]"
+                            value="<?php echo  $avprr2[0] ; ?>"></td>
+                            </tr>
+                            <?php
+                            }
+                            ?>
+                            <tr>
+                            <td colspan="7">
+                            <center><a href="stockscostpi.php" class="btn btn-default" style="color:black;"> Download Excel File </a></center>
+                            </td>
+                            </tr>
+                            </tbody>
+                            </table>
+                            </div>                            
+                      </form>
     </div>  
     <!-- Add product Name -->
     <div id="add_product" class="tab-pane fade " >
@@ -988,7 +982,7 @@ $("#cat").hide();
             echo "<tr>";
             echo "<td>". $nameval['Product Name'] . "</td>";
             echo "<td>". $nameval['Quantity'] . "</td>";
-            echo "<td>". $nameval['Total Cost']."</td>";
+            echo "<td>". round($nameval['Total Cost'],2)."</td>";
             echo "<td>". round($nameval['Average Cost per Unit'],2)."</td>";
             echo "<td>". round($nameval['Maximum Cost per Unit'],2)."</td>";
             echo "<td>". round($nameval['Minimum Cost per Unit'],2)."</td>";
@@ -1066,10 +1060,28 @@ function SidebarCollapse () {
     // Collapse/Expand icon
     $('#collapse-icon').toggleClass('fa-angle-double-left fa-angle-double-right');
 }
-
+function catdisplay(){
+    show('cat');
+    hide('brn');
+    hide('cst');
+}
+function brndisplay(){
+    hide('cat');
+    show('brn');
+    hide('cst');
+}
+function cstdisplay(){
+    hide('cat');
+    hide('brn');
+    show('cst');
+}
 function hide(obj){
     var el = document.getElementById(obj);
     el.style.display = 'none';
+}
+function show(obj){
+    var el = document.getElementById(obj);
+    el.style.display = 'block';
 }
 </script>
 <style>
