@@ -15,7 +15,7 @@ if(isset($_REQUEST["newlogin"]))
     $slgps= $_REQUEST["apas"];
     
 
-    if($slgid!=''&&$slgps!=='')
+    if($slgid!=''&& $slgps!=='')
     {
         $query = mysqli_query($con, "select * from t_user where a_email ='$slgid' and a_pswd ='$slgps'");
         $res   = mysqli_fetch_row($query);
@@ -122,7 +122,7 @@ if(isset($_REQUEST["newlogin"]))
     <body>
     <center>
         <div class="container">
-          <img src="images/catergory-banner-electronics.png">
+          <img src="images/sanstechno.jpeg">
         </div>
        </center> <br>
         
