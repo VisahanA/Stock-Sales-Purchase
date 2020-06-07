@@ -14,6 +14,7 @@ die("Database Not Found");
 /* $sc=  mysqli_query($con, "select p_tdate from t_purtrans where p_id='PRD0001'");
 $date = date_create($sc);
 echo date_format($date, "d/M/Y");*/
+$userid=$_REQUEST["username"];
 
 $phid=$_REQUEST["phid"];
 $pname=$_REQUEST["pname"];
@@ -390,7 +391,13 @@ $("#cat").hide();
            The sidebar isn't proper for smaller screens imo, so this dropdown menu can keep all the useful sidebar itens exclusively for smaller screens  -->
         </ul>
     <span class="navbar-text">
-      Username 
+    <?php
+    
+    $q=mysqli_query($con,"select a_name from t_user where a_email='".$_SESSION['ad']."'");
+    $n=  mysqli_fetch_assoc($q);
+    $cname= $n['a_name'];
+    echo $cname;
+    ?>
     </span>
     </div>
 </nav>
