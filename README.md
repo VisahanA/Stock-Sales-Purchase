@@ -1,4 +1,6 @@
 # Warehouse_management
+
+<img src="https://firebasestorage.googleapis.com/v0/b/vichu-s-blog.appspot.com/o/Screenshot%202020-06-15%20at%203.20.23%20PM.png?alt=media&token=2d43a882-e7db-4c1c-94df-40b6511bbb88"></img>
 How to run this application ?
 
 1)Install Xampp <br>
