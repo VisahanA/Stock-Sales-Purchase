@@ -12,20 +12,20 @@
 
 
 CREATE TABLE IF NOT EXISTS `warehouse_details` (
-  `product_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL ,
   `product_name` varchar(20) NOT NULL,
   `quantity` bigint(20) NOT NULL,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `product` (
-  `product_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `product_name` varchar(20) NOT NULL,
   PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `productprice` (
-  `product_price_id` bigint(20) NOT NULL,
+  `product_price_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
   `product_id` bigint(20) NOT NULL,
   `price` float(20) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `productprice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `restaurant` (
-  `restaurant_id` bigint(20) NOT NULL,
+  `restaurant_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `restaurant_name` date NOT NULL,
   `address`varchar(20) NOT NULL,
   `mobile` varchar(20) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `restaurant_stock` (
-  `restaurant_product_id` bigint(20) NOT NULL,
+  `restaurant_product_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `product_id` bigint(20) NOT NULL,
   `quantity`bigint(20) NOT NULL,
   `restaurant_id` bigint(20) NOT NULL,
