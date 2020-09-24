@@ -369,7 +369,6 @@ $("#cat").hide();
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">
-        <img src="images/sanstechno.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
         <span class="menu-collapsed"></span>
     </a>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
